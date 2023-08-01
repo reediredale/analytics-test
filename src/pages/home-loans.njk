@@ -9,6 +9,9 @@ eleventyNavigation:
 
 <ul>
      {% for item in home.items %}
-     <li><a href="{{ item.link }}">{{ item.name }}</a></li>
+     <li class="flex mx-auto justify-between mb-4">
+     <h2>{{ item.name }}</h2>
+     <a class="bg-blue" href="{{ item.link }}">Go to Site</a>
+     </li>
      {% endfor %}
 </ul>

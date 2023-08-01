@@ -1,0 +1,14 @@
+---
+title: Home Loans
+layout: layouts/base.njk
+permalink: /home-loans/
+eleventyNavigation:
+  key: Home Loans
+  order: 0
+---
+
+<ul>
+     {% for item in home.items %}
+     <li><a href="{{ item.link }}">{{ item.name }}</a></li>
+     {% endfor %}
+</ul>

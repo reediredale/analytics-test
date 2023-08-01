@@ -1,0 +1,20 @@
+{
+    "items": [
+        {
+            "name": "Loans.com.au",
+            "link": "/redirect"
+        },
+        {
+            "name": "CommBank",
+            "link": "/redirect"
+        },
+        {
+            "name": "ANZ",
+            "link": "/redirect"
+        },
+        {
+            "name": "Westpac",
+            "link": "/redirect"
+        }
+    ]
+}

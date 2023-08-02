@@ -18,7 +18,10 @@
       {{ content | safe }}
     </main>
     <script src="/assets/main.js"></script>
-    <script>
+
+
+ 
+  <script>
 selectItemDatalayer(selectType: string, identifier: string, idx: number, product: any, profileName: string, profileId: string, variant = 'profile table') {
     if (variant === 'profile table' && product.isPromoted && product.rank) {
       variant = 'sponsored product listing - expanded';
@@ -68,8 +71,7 @@ selectItemDatalayer(selectType: string, identifier: string, idx: number, product
   </script>
 
   <script>
-
-  pushEngagement(formCategory: string, formAction: string, formLabel: string, name: string, id: string,
+    pushEngagement(formCategory: string, formAction: string, formLabel: string, name: string, id: string,
       productVertical: string, interaction = 'click', product = null) {
 
     const engagementObj = {

@@ -18,9 +18,84 @@
       {{ content | safe }}
     </main>
     <script src="/assets/main.js"></script>
-   
+    <script>
+selectItemDatalayer(selectType: string, identifier: string, idx: number, product: any, profileName: string, profileId: string, variant = 'profile table') {
+    if (variant === 'profile table' && product.isPromoted && product.rank) {
+      variant = 'sponsored product listing - expanded';
+    }
+    if (variant === 'profile table' && product.brokerForm) {
+      variant = 'partner';
+    }
+    if (window.location.href && window.location.href.includes('/wiselist')) {
+      variant = 'wiselist profile table';
+    }
+    let category2 = '';
+    if (product.purposes) {
+      category2 = product.purposes.toString()
+    }
+    if (product.type) {
+      category2 = product.type.toString()
+    }
+    const category = product.groupCategory.includes(' ') ? this.titleCase(product.groupCategory) : product.groupCategory;
 
+    const productObj = {
+      event: 'select_item',
+      ecommerce: {
+        items: [{
+          item_name: product.name,
+          item_id: identifier,
+          item_brand: product.companyName,
+          item_category: category,
+          item_category_2: category2 || product.groupCategory.toLowerCase(),
+          item_category_3: selectType,
+          item_category_4: product.isCommercial ? 'Monetised' : 'Unmonetised',
+          item_variant: variant,
+          item_list_name: profileName,
+          item_list_id: profileId,
+          index: idx + 1,
+          quantity: null,
+          price: null
+        }]
+      }
+    };
 
+    if ((window as any).dataLayer) {
+      (window as any).dataLayer.push(productObj);
+    } else {
+      console.table(productObj.ecommerce.items[0]);
+    }
+  }
+  </script>
+
+  <script>
+
+  pushEngagement(formCategory: string, formAction: string, formLabel: string, name: string, id: string,
+      productVertical: string, interaction = 'click', product = null) {
+
+    const engagementObj = {
+      event: 'engagement',
+      category: `engagement - ${formCategory}`,
+      action: formAction,
+      label: formLabel,
+      'component Name': name,
+      'component ID': id,
+      'interaction type': interaction,
+      vertical: productVertical
+    };
+
+    if (formCategory === 'lead referral' && product) {
+      engagementObj['item_id'] = product.id || '';
+      engagementObj['item_brand'] = product.companyName || '';
+      engagementObj['item_name'] = product.name || '';
+    }
+
+    if ((window as any).dataLayer) {
+      (window as any).dataLayer.push(engagementObj);
+    } else {
+      console.table(engagementObj);
+    }
+  }
+  </script>
 
   </body>
 </html>
